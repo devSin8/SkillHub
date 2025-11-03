@@ -1,5 +1,3 @@
-Here is a complete `README.md` file for your project. You can copy and paste this directly into a file named `README.md` in the root of your project's GitHub repository.
-
 -----
 
 # Peer-to-Peer Project Showcase Hub
