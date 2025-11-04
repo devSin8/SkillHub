@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { saveProfile } from '../api'; // <-- UPDATED
 
 const EditProfilePage = () => {
     const [name, setName] = useState('');
@@ -22,7 +22,7 @@ const EditProfilePage = () => {
         };
 
         try {
-            await axios.post('http://localhost:8080/api/profile', profileData);
+            await saveProfile(profileData); // <-- UPDATED
             alert('Profile saved successfully!');
         } catch (error) {
             console.error("Error saving profile:", error);
@@ -34,6 +34,7 @@ const EditProfilePage = () => {
         <div className="container mt-4" style={{ maxWidth: '800px' }}>
             <h2>Edit Your Profile</h2>
             <form onSubmit={handleSubmit}>
+                {/* ... all form inputs ... (no changes here) */}
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">Name</label>
                     <input type="text" className="form-control" id="name"
@@ -53,7 +54,7 @@ const EditProfilePage = () => {
                     <label htmlFor="languages" className="form-label">Languages (comma-separated)</label>
                     <input type="text" className="form-control" id="languages"
                         placeholder="e.g., Java, Python, JavaScript"
-                        value={languages} onChange={(e) => setLanguages(e.target.value)} />
+                        value={languages} onChange={(e) => setLanguages(e.g.target.value)} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="github" className="form-label">GitHub Profile URL</label>
@@ -63,7 +64,7 @@ const EditProfilePage = () => {
                 <div className="mb-3">
                     <label htmlFor="linkedin" className="form-label">LinkedIn Profile URL</label>
                     <input type="url" className="form-control" id="linkedin"
-                        value={linkedinUrl} onChange={(e) => setLinkedinUrl(e.target.value)} />
+                        value={linkedinUrl} onChange={(e) => setLinkedinUrl(e.g.target.value)} />
                 </div>
                 <button type="submit" className="btn btn-primary">Save Profile</button>
             </form>
