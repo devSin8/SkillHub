@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { getAllProjects } from '../api';
 import ProjectCard from '../components/ProjectCard';
 
 const Dashboard = () => {
     const [projects, setProjects] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/projects')
+        getAllProjects()
             .then(response => {
                 setProjects(response.data);
             })
