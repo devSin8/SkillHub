@@ -39,6 +39,6 @@ export const login = (authData) => {
   return api.post("/api/auth/login", authData);
 };
 
-export const register = (authData) => {
-  return api.post("/api/auth/register", authData);
+export const signup = (authData) => {
+  return api.post("/api/auth/signup", authData);
 };
