@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { signup } from '../api'; // <-- UPDATED
 
 const SignupPage = () => {
     const [email, setEmail] = useState('');
@@ -13,9 +13,9 @@ const SignupPage = () => {
         const authData = { email, password };
 
         try {
-            await axios.post('http://localhost:8080/api/signup', authData);
+            await signup(authData); // <-- UPDATED
             alert('Signup successful! Please log in. (Local Demo)');
-            navigate('/login'); // Redirect to login page
+            navigate('/login'); 
         } catch (error) {
             console.error("Error signing up:", error);
             alert("Signup failed. Check console for details.");
@@ -26,6 +26,7 @@ const SignupPage = () => {
         <div className="container mt-5" style={{ maxWidth: '500px' }}>
             <h2>Sign Up</h2>
             <form onSubmit={handleSubmit}>
+                {/* ... all form inputs ... (no changes here) */}
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email address</label>
                     <input
@@ -44,7 +45,7 @@ const SignupPage = () => {
                         className="form-control"
                         id="password"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => setPassword(e.g.target.value)}
                         required
                     />
                 </div>
