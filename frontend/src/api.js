@@ -1,43 +1,44 @@
 import axios from 'axios';
 
-// Get the base URL from the environment variable we just created
-const API_BASE_URL = process.env.REACT_APP_API_URL;
+// ✅ Get the base URL from environment variable (defined in .env)
+const API_BASE_URL = process.env.REACT_APP_API_URL || "https://skillhub-production.up.railway.app";
 
-// Create a function for each API call
+// ✅ Create a reusable axios instance
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 // --- Project Calls ---
 
 export const getAllProjects = () => {
-    return axios.get(`${https://skillhub-production.up.railway.app/}/api/projects`);
+  return api.get("/api/projects");
 };
 
 export const getProjectById = (id) => {
-    return axios.get(`${https://skillhub-production.up.railway.app/}/api/projects/${id}`);
+  return api.get(`/api/projects/${id}`);
 };
 
 export const getCommentsByProjectId = (id) => {
-    return axios.get(`${https://skillhub-production.up.railway.app/}/api/projects/${id}/comments`);
+  return api.get(`/api/projects/${id}/comments`);
 };
 
 export const submitProject = (projectData) => {
-    return axios.post(`${https://skillhub-production.up.railway.app/}/api/projects`, projectData);
+  return api.post("/api/projects", projectData);
 };
 
-// --- User Calls ---
+// --- User & Auth Calls ---
 
 export const saveProfile = (profileData) => {
-    return axios.post(`${https://skillhub-production.up.railway.app/}/api/profile`, profileData);
+  return api.post("/api/profile", profileData);
 };
 
 export const login = (authData) => {
-    return axios.post(`${https://skillhub-production.up.railway.app/}/api/login`, authData);
+  return api.post("/api/auth/login", authData);
 };
 
-export const signup = (authData) => {
-    return axios.post(`${https://skillhub-production.up.railway.app/}/api/signup`, authData);
-};
-
-// You can add more functions here, like your 'getUsers' example
-export const getUsers = () => {
-  return axios.get(`${https://skillhub-production.up.railway.app/}/api/users`);
+export const register = (authData) => {
+  return api.post("/api/auth/register", authData);
 };
