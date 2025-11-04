@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { login } from '../api'; // <-- UPDATED
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -13,9 +13,9 @@ const LoginPage = () => {
         const authData = { email, password };
 
         try {
-            await axios.post('http://localhost:8080/api/login', authData);
+            await login(authData); // <-- UPDATED
             alert('Login successful! (Local Demo)');
-            navigate('/'); // Redirect to the dashboard
+            navigate('/'); 
         } catch (error) {
             console.error("Error logging in:", error);
             alert("Login failed. Check console for details.");
@@ -26,6 +26,7 @@ const LoginPage = () => {
         <div className="container mt-5" style={{ maxWidth: '500px' }}>
             <h2>Login</h2>
             <form onSubmit={handleSubmit}>
+                {/* ... all form inputs ... (no changes here) */}
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email address</label>
                     <input
