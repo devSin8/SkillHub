@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import { getProjectById, getCommentsByProjectId } from '../api'; // <-- UPDATED
 
 const ProjectDetails = () => {
     const { id } = useParams();
@@ -9,12 +9,12 @@ const ProjectDetails = () => {
 
     useEffect(() => {
         // Fetch project details
-        axios.get(`http://localhost:8080/api/projects/${id}`)
+        getProjectById(id) // <-- UPDATED
             .then(res => setProject(res.data))
             .catch(err => console.error(err));
 
         // Fetch project comments
-        axios.get(`http://localhost:8080/api/projects/${id}/comments`)
+        getCommentsByProjectId(id) // <-- UPDATED
             .then(res => setComments(res.data))
             .catch(err => console.error(err));
     }, [id]);
