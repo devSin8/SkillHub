@@ -20,7 +20,10 @@ import com.showcase.hub.model.UserProfile;
 
 @RestController
 @RequestMapping("/api/projects")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {
+    "http://localhost:3000",
+    "https://project-showcase-hub.firebaseapp.com"
+})
 public class ProjectController {
 
     private final List<Project> projects = new ArrayList<>();
@@ -53,44 +56,40 @@ public class ProjectController {
 
     @PostMapping
     public Project createProject(@RequestBody Project newProject) {
-    long newId = projects.stream().mapToLong(Project::getId).max().orElse(0L) + 1;
-    newProject.setId(newId);
+        long newId = projects.stream().mapToLong(Project::getId).max().orElse(0L) + 1;
+        newProject.setId(newId);
 
-    if (newProject.getMediaUrl() == null || newProject.getMediaUrl().isEmpty()) {
-        newProject.setMediaUrl("https://via.placeholder.com/400x250.png?text=New+Project");
+        if (newProject.getMediaUrl() == null || newProject.getMediaUrl().isEmpty()) {
+            newProject.setMediaUrl("https://via.placeholder.com/400x250.png?text=New+Project");
+        }
+
+        projects.add(0, newProject);
+        System.out.println("Added new project: " + newProject.getTitle());
+        return newProject;
     }
 
-    projects.add(0, newProject);
-    System.out.println("Added new project: " + newProject.getTitle());
-    return newProject;
-
-    
-}
-    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/api/profile")
     public void saveProfile(@RequestBody UserProfile profile) {
-    System.out.println("Received profile update:");
-    System.out.println("Name: " + profile.getName());
-    System.out.println("Register No: " + profile.getCollegeRegisterNumber());
-    System.out.println("Phone: " + profile.getPhoneNumber());
-    System.out.println("Languages: " + profile.getLanguages());
-    System.out.println("GitHub: " + profile.getGithubUrl());
-    System.out.println("LinkedIn: " + profile.getLinkedinUrl());
-}
-
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/api/signup")
-public void handleSignup(@RequestBody AuthRequest authRequest) {
-    System.out.println("Received new signup request:");
-    System.out.println("Email: " + authRequest.getEmail());
-    System.out.println("Password: " + authRequest.getPassword());
-}
-
-@CrossOrigin(origins = "http://localhost:3000")
-@PostMapping("/api/login")
-public void handleLogin(@RequestBody AuthRequest authRequest) {
-    System.out.println("Received login attempt:");
-    System.out.println("Email: " + authRequest.getEmail());
-    System.out.println("Password: " + authRequest.getPassword());
-}
+        System.out.println("Received profile update:");
+        System.out.println("Name: " + profile.getName());
+        System.out.println("Register No: " + profile.getCollegeRegisterNumber());
+        System.out.println("Phone: " + profile.getPhoneNumber());
+        System.out.println("Languages: " + profile.getLanguages());
+        System.out.println("GitHub: " + profile.getGithubUrl());
+        System.out.println("LinkedIn: " + profile.getLinkedinUrl());
     }
+
+    @PostMapping("/api/signup")
+    public void handleSignup(@RequestBody AuthRequest authRequest) {
+        System.out.println("Received new signup request:");
+        System.out.println("Email: " + authRequest.getEmail());
+        System.out.println("Password: " + authRequest.getPassword());
+    }
+
+    @PostMapping("/api/login")
+    public void handleLogin(@RequestBody AuthRequest authRequest) {
+        System.out.println("Received login attempt:");
+        System.out.println("Email: " + authRequest.getEmail());
+        System.out.println("Password: " + authRequest.getPassword());
+    }
+}
