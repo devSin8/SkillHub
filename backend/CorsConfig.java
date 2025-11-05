@@ -17,6 +17,7 @@ public class CorsConfig {
                         .allowedOrigins(
                             "https://project-showcase-hub-5f048.firebaseapp.com",
                             "https://project-showcase-hub-5f048.web.app"
+                            "https://skillhub-production.up.railway.app"
                         )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
