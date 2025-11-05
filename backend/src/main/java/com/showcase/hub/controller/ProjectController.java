@@ -22,7 +22,7 @@ import com.showcase.hub.model.UserProfile;
 @RequestMapping("/api/projects")
 @CrossOrigin(origins = {
     "http://localhost:3000",
-    "https://project-showcase-hub.firebaseapp.com"
+    "https://skillhub-production.up.railway.app"
 })
 public class ProjectController {
 
