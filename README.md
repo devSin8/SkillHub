@@ -1,6 +1,6 @@
 -----
 
-# Peer-to-Peer Project Showcase Hub
+# Project Showcase Hub
 
 A full-stack web application designed to help students upload, showcase, and get peer feedback on academic projects. This platform enables project visibility, collaboration, and recognition through verified student portfolios.
 
